@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { ReactNode } from "react";
+import { ThemeProvider } from "@/components/theme";
 
 import "./globals.css";
 
@@ -15,11 +16,18 @@ export default function RootLayout({
 	children: ReactNode;
 }>) {
 	return (
-		<html lang="en" className={``}>
+		<html lang="en" className={``} suppressHydrationWarning>
 			<body
 				className={`antialiased`}
 			>
-				{children}
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="dark"
+					enableSystem
+					disableTransitionOnChange
+				>
+					{children}
+				</ThemeProvider>
 			</body>
 		</html>
 	);
