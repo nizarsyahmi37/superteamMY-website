@@ -4,6 +4,7 @@ import { ReactNode } from "react";
 import { ThemeProvider } from "@/components/theme";
 
 import "./globals.css";
+import { LayoutProvider } from "@/components/general/layout";
 
 export const metadata: Metadata = {
 	title: "Superteam Malaysia",
@@ -26,7 +27,9 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					{children}
+					<LayoutProvider>
+						{children}
+					</LayoutProvider>
 				</ThemeProvider>
 			</body>
 		</html>
