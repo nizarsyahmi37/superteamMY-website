@@ -9,8 +9,8 @@
 	--color-foreground: var(--foreground);
 	--color-super-purple: var(--super-purple);
 	--color-super-yellow: var(--super-yellow);
-	--color-purple-tint: var(--super-purple-tint);
-	--color-yellow-tint: var(--super-yellow-tint);
+	--color-purple-tint: var(--purple-tint);
+	--color-yellow-tint: var(--yellow-tint);
 	--font-sans: var(--font-sans);
 	--font-mono: var(--font-geist-mono);
 	--color-sidebar-ring: var(--sidebar-ring);
