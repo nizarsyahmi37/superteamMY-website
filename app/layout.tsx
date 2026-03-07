@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 
 import { ReactNode } from "react";
 import { ThemeProvider } from "@/components/theme";
+import { LayoutProvider } from "@/components/general/layout";
 
 import "./globals.css";
-import { LayoutProvider } from "@/components/general/layout";
 
 export const metadata: Metadata = {
 	title: "Superteam Malaysia",

@@ -7,7 +7,7 @@ import Link from "next/link";
 export function Footer() {
 	return (
 		<footer
-			className={`grid grid-rows-[1fr_1.2rem_auto] grid-cols-2 bg-super-purple rounded-2xl p-3 md:min-h-[calc(50vh-0.75rem)] md:rounded-4xl md:p-6 lg:grid-cols-[2fr_1fr]`}
+			className={`text-background grid grid-rows-[1fr_1.2rem_auto] grid-cols-2 bg-super-purple rounded-2xl p-3 md:min-h-[calc(50vh-0.75rem)] md:rounded-4xl md:p-6 lg:grid-cols-[2fr_1fr] dark:text-foreground`}
 		>
 			<div
 				className={`z-110 grid gap-2 grid-rows-[auto_1fr] col-start-1 row-start-1 col-end-3 row-end-2 md:col-end-2`}
@@ -158,7 +158,7 @@ export function Footer() {
 				className={`col-start-1 row-start-2 col-end-3 row-end-4 border-t-2 pt-4 grid gap-2 grid-cols-1 md:grid-cols-[1fr_auto]`}
 			>
 				<div
-					className={`text-sm text-foreground/75 mx-auto flex flex-col gap-0 align-middle items-center sm:flex-row sm:gap-1 md:mx-0`}
+					className={`text-sm text-background/75 mx-auto flex flex-col gap-0 align-middle items-center sm:flex-row sm:gap-1 md:mx-0 dark:text-foreground/75`}
 				>
 					<p>
 						© 2026 SuperteamMY. All rights reserved.
