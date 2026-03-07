@@ -35,6 +35,14 @@ export function Footer() {
 								className={`my-3 grid gap-1`}
 							>
 								<Link
+									href={`https://superteam.fun/`}
+									title={`Superteam | The Talent Layer of Solana`}
+									target={`_blank`}
+									className={`hover:underline hover:text-amber-400`}
+								>
+									Global
+								</Link>
+								<Link
 									href={`https://earn.superteam.fun/`}
 									title={`Superteam Earn | Crypto Bounties, Web3 Jobs & Solana Opportunities`}
 									target={`_blank`}
