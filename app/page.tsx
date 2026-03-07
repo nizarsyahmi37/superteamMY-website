@@ -10,7 +10,9 @@ import { ViewsLandingStats } from "@/components/views/landing/stats";
 
 export default function Page() {
 	return (
-		<div>
+		<div
+			className={`grid gap-4`}
+		>
 			<ViewsLandingHero />
 			<ViewsLandingMission />
 			<ViewsLandingStats />
