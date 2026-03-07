@@ -128,28 +128,28 @@ export function Footer() {
 				<Image
 					className={`hidden xl:block ml-auto mt-auto`}
 					src={`/assets/batik/floral-3.svg`}
-					alt={`Superteam Malaysia`}
+					alt={`Superteam Malaysia - Floral Batik Motif 2`}
 					width={400}
 					height={400}
 				/>
 				<Image
 					className={`hidden md:block xl:hidden ml-auto mt-auto`}
 					src={`/assets/batik/floral-3.svg`}
-					alt={`Superteam Malaysia`}
+					alt={`Superteam Malaysia - Floral Batik Motif 3`}
 					width={360}
 					height={360}
 				/>
 				<Image
 					className={`hidden sm:block md:hidden mx-auto mt-auto`}
 					src={`/assets/batik/floral-2.svg`}
-					alt={`Superteam Malaysia`}
+					alt={`Superteam Malaysia - Floral Batik Motif 2`}
 					width={500}
 					height={500}
 				/>
 				<Image
 					className={`block sm:hidden mx-auto mt-auto`}
 					src={`/assets/batik/floral-2.svg`}
-					alt={`Superteam Malaysia`}
+					alt={`Superteam Malaysia - Floral Batik Motif 2`}
 					width={400}
 					height={400}
 				/>
