@@ -8,7 +8,7 @@ import { LayoutProvider } from "@/components/general/layout";
 
 export const metadata: Metadata = {
 	title: "Superteam Malaysia",
-	description: "Superteam Malaysia"
+	description: "The Talent Layer of Solana in Malaysia"
 };
 
 export default function RootLayout({
