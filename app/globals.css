@@ -7,7 +7,10 @@
 @theme inline {
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
-	--color-superteam-purple: var(--superteam-purple);
+	--color-super-purple: var(--super-purple);
+	--color-super-yellow: var(--super-yellow);
+	--color-purple-tint: var(--super-purple-tint);
+	--color-yellow-tint: var(--super-yellow-tint);
 	--font-sans: var(--font-sans);
 	--font-mono: var(--font-geist-mono);
 	--color-sidebar-ring: var(--sidebar-ring);
@@ -81,7 +84,10 @@
 	--sidebar-accent-foreground: oklch(0.205 0 0);
 	--sidebar-border: oklch(0.922 0 0);
 	--sidebar-ring: oklch(0.708 0 0);
-	--superteam-purple: oklch(0.4696 0.2538 282.87);
+	--super-purple: oklch(0.4696 0.2538 282.87);
+	--super-yellow: oklch(0.7818 0.1634 74.83);
+	--purple-tint: oklch(0.8018 0.1067 289.18);
+	--yellow-tint: oklch(0.9045 0.0832 77.04);
 }
 
 .dark {
@@ -116,7 +122,10 @@
 	--sidebar-accent-foreground: oklch(0.985 0 0);
 	--sidebar-border: oklch(1 0 0 / 10%);
 	--sidebar-ring: oklch(0.556 0 0);
-	--superteam-purple: oklch(0.4696 0.2538 282.87);
+	--super-purple: oklch(0.4696 0.2538 282.87);
+	--super-yellow: oklch(0.7818 0.1634 74.83);
+	--purple-tint: oklch(0.8018 0.1067 289.18);
+	--yellow-tint: oklch(0.9045 0.0832 77.04);
 }
 
 @layer base {

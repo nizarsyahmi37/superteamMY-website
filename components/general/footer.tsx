@@ -7,7 +7,7 @@ import Link from "next/link";
 export function Footer() {
 	return (
 		<footer
-			className={`grid grid-rows-[1fr_1.2rem_auto] grid-cols-2 bg-superteam-purple rounded-2xl p-3 md:min-h-[calc(50vh-0.75rem)] md:rounded-4xl md:p-6 lg:grid-cols-[2fr_1fr]`}
+			className={`grid grid-rows-[1fr_1.2rem_auto] grid-cols-2 bg-super-purple rounded-2xl p-3 md:min-h-[calc(50vh-0.75rem)] md:rounded-4xl md:p-6 lg:grid-cols-[2fr_1fr]`}
 		>
 			<div
 				className={`z-110 grid gap-2 grid-rows-[auto_1fr] col-start-1 row-start-1 col-end-3 row-end-2 md:col-end-2`}
@@ -38,7 +38,7 @@ export function Footer() {
 									href={`https://superteam.fun/`}
 									title={`Superteam | The Talent Layer of Solana`}
 									target={`_blank`}
-									className={`hover:underline hover:text-amber-400`}
+									className={`hover:underline hover:text-super-yellow`}
 								>
 									Global
 								</Link>
@@ -46,7 +46,7 @@ export function Footer() {
 									href={`https://earn.superteam.fun/`}
 									title={`Superteam Earn | Crypto Bounties, Web3 Jobs & Solana Opportunities`}
 									target={`_blank`}
-									className={`hover:underline hover:text-amber-400`}
+									className={`hover:underline hover:text-super-yellow`}
 								>
 									Earn
 								</Link>
@@ -54,7 +54,7 @@ export function Footer() {
 									href={`https://talent.superteam.fun/`}
 									title={`Superteam Talent | Your portal to leading Solana jobs`}
 									target={`_blank`}
-									className={`hover:underline hover:text-amber-400`}
+									className={`hover:underline hover:text-super-yellow`}
 								>
 									Talent
 								</Link>
@@ -62,7 +62,7 @@ export function Footer() {
 									href={`https://luma.com/mysuperteam/`}
 									title={`Superteam Malaysia Luma Events Calendar | Your guide to Superteam Malaysia's upcoming events`}
 									target={`_blank`}
-									className={`hover:underline hover:text-amber-400`}
+									className={`hover:underline hover:text-super-yellow`}
 								>
 									Events
 								</Link>
@@ -81,7 +81,7 @@ export function Footer() {
 									href={`https://x.com/SuperteamMY/`}
 									title={`Superteam Malaysia on X/Twitter`}
 									target={`_blank`}
-									className={`hover:underline hover:text-amber-400`}
+									className={`hover:underline hover:text-super-yellow`}
 								>
 									X / Twitter
 								</Link>
@@ -89,7 +89,7 @@ export function Footer() {
 									href={`https://www.instagram.com/superteammy/`}
 									title={`Superteam Malaysia on Instagram`}
 									target={`_blank`}
-									className={`hover:underline hover:text-amber-400`}
+									className={`hover:underline hover:text-super-yellow`}
 								>
 									Instagram
 								</Link>
@@ -97,7 +97,7 @@ export function Footer() {
 									href={`https://t.me/SuperteamMY/`}
 									title={`Superteam Malaysia on Telegram`}
 									target={`_blank`}
-									className={`hover:underline hover:text-amber-400`}
+									className={`hover:underline hover:text-super-yellow`}
 								>
 									Telegram
 								</Link>
@@ -110,7 +110,7 @@ export function Footer() {
 					prefetch={`auto`}
 					title={`Superteam Malaysia | A community of the best talent learning, earning and building on Solana in Malaysia`}
 					target={`_blank`}
-					className={`grid grid-cols-[1fr_auto] align-middle content-center font-bold duration-150 uppercase text-5xl mb-48 mt-auto sm:mb-60 md:mb-4 sm:text-6xl hover:animate-pulse hover:text-amber-400`}
+					className={`grid grid-cols-[1fr_auto] align-middle content-center font-bold duration-150 uppercase text-5xl mb-48 mt-auto sm:mb-60 md:mb-4 sm:text-6xl hover:animate-pulse hover:text-super-yellow`}
 				>
 					<h2
 						className={`${archivo.className} my-auto`}
@@ -170,7 +170,7 @@ export function Footer() {
 						target={`_blank`}
 						className={`group`}
 					>
-						Made by <span className={`font-bold group-hover:text-amber-400`}>NizarSyahmi37</span>
+						Made by <span className={`font-bold group-hover:text-super-yellow`}>NizarSyahmi37</span>
 					</Link>
 				</div>
 				<div
@@ -180,7 +180,7 @@ export function Footer() {
 						href={`/privacy`}
 						title={`Privacy`}
 						target={`_self`}
-						className={`font-bold hover:text-amber-400`}
+						className={`font-bold hover:text-super-yellow`}
 					>
 						Privacy
 					</Link>
@@ -188,7 +188,7 @@ export function Footer() {
 						href={`/terms`}
 						title={`Terms`}
 						target={`_self`}
-						className={`font-bold hover:text-amber-400`}
+						className={`font-bold hover:text-super-yellow`}
 					>
 						Terms
 					</Link>
