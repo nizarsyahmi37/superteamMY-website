@@ -1,5 +1,5 @@
+import { LuArrowUpRight } from "react-icons/lu";
 import { archivo } from '@/lib/general/fonts';
-import { ArrowUpRight } from 'lucide-react';
 
 import Image from "next/image";
 import Link from "next/link";
@@ -117,7 +117,7 @@ export function Footer() {
 					>
 						Join Us
 					</h2>
-					<ArrowUpRight
+					<LuArrowUpRight
 						className={`w-18 h-18`}
 					/>
 				</Link>
