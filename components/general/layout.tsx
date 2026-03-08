@@ -13,7 +13,9 @@ export function LayoutProvider({
 			className={`${archivo.className} grid gap-4 p-3 md:p-6`}
 		>
 			<Header />
-			<main>
+			<main
+				className={`mt-24`}
+			>
 				{children}
 			</main>
 			<Footer />
