@@ -1,7 +1,8 @@
 "use client"
 
+import type { EmblaCarouselType } from "embla-carousel";
+import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { ReactNode, useEffect, useRef, useState } from "react";
 
 export function CarouselAdaptive({
 	className,
@@ -10,19 +11,19 @@ export function CarouselAdaptive({
 	className: string;
 	children: ReactNode;
 }) {
-	const [api, setApi] = useState<any>();
+	const [api, setApi] = useState<EmblaCarouselType | undefined>();
 	const contentRef = useRef<HTMLDivElement>(null);
 
-	const updateHeight = () => {
+	const updateHeight = useCallback(() => {
 		if (!api || !contentRef.current) return;
 
 		const selectedIndex = api.selectedScrollSnap();
 		const slide = contentRef.current.children[selectedIndex] as HTMLElement;
 
 		if (slide) {
-		contentRef.current.style.height = `${slide.offsetHeight}px`;
+			contentRef.current.style.height = `${slide.offsetHeight}px`;
 		}
-	};
+	}, [api]);
 
 	useEffect(() => {
 		if (!api) return;
