@@ -20,9 +20,9 @@ export function ViewsLandingCommunity() {
 					className={`grid grid-cols-20 grid-rows-[auto_auto] h-fit gap-4`}
 				>
 					<h3
-						className={`uppercase text-5xl col-start-1 col-end-19 row-start-1 row-end-2 sm:text-6xl lg:col-end-16`}
+						className={`uppercase text-5xl col-start-1 col-end-19 row-start-1 row-end-2 sm:text-6xl lg:col-end-13`}
 					>
-						Built by the <span className={`${archivo_black.className}`}>Community</span>
+						What the Community Is <span className={`${archivo_black.className}`}>Saying</span>
 					</h3>
 					<p
 						className={`col-start-1 col-end-18 row-start-2 row-end-3`}
