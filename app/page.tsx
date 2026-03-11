@@ -19,8 +19,8 @@ export default function Page() {
 			<ViewsLandingEvents />
 			<ViewsLandingMembers />
 			<ViewsLandingPartners />
-			<ViewsLandingCommunity />
 			<ViewsLandingFaq />
+			<ViewsLandingCommunity />
 			<ViewsLandingCta />
 		</div>
 	);
