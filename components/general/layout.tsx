@@ -14,7 +14,7 @@ export function LayoutProvider({
 		>
 			<Header />
 			<main
-				className={`my-24`}
+				className={`my-24 lg:mt-30`}
 			>
 				{children}
 			</main>
