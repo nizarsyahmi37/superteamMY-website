@@ -23,7 +23,7 @@ export function ViewsLandingStats() {
 				</h3>
 			</div>
 			<div
-				className={`grid grid-cols-9 gap-4`}
+				className={`grid grid-cols-9 gap-4 lg:gap-8`}
 			>
 				<p
 					className={`col-start-1 col-end-10 row-start-1 row-end-2 rounded-xl p-0 sm:col-end-9 md:p-4 md:rounded-2xl md:col-start-2 md:col-end-6 md:row-start-1 md:row-end-2 lg:col-start-3`}
@@ -39,7 +39,6 @@ export function ViewsLandingStats() {
 					opts={{
 						align: "start",
 					}}
-					// "w-full max-w-48 sm:max-w-xs md:max-w-sm"
 					className={`col-start-1 col-end-10 row-start-3 row-end-4 rounded-xl py-4 md:rounded-2xl md:hidden`}
 				>
 					<CarouselContent
