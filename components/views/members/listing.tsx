@@ -43,13 +43,15 @@ function MemberCard({ member }: { member: Member }) {
 			<DialogTrigger asChild>
 				<div className="bg-card border rounded-lg p-4 cursor-pointer hover:border-super-yellow transition-colors">
 					<div className="flex flex-col items-center text-center">
-						<Image
-							className="rounded-xl mb-3"
-							src={member.photoUrl}
-							alt={member.name}
-							width={100}
-							height={100}
-						/>
+						<div className="relative w-24 h-24 rounded-xl overflow-hidden bg-muted mb-3 aspect-square">
+							<Image
+								className="object-cover"
+								src={member.photoUrl}
+								alt={member.name}
+								fill
+								sizes="96px"
+							/>
+						</div>
 						<p className={`${archivo_black} font-bold`}>{member.name}</p>
 						<p className="text-sm text-muted-foreground">@{member.xLink}</p>
 						<p className="text-sm mt-2">{member.roleCompany}</p>
@@ -72,13 +74,16 @@ function MemberCard({ member }: { member: Member }) {
 			<DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
 				<DialogHeader>
 					<DialogTitle className="flex items-center gap-4">
-						<Image
-							className="rounded-lg md:rounded-xl"
-							src={member.photoUrl}
-							alt={member.name}
-							width={80}
-							height={80}
-						/>
+						<div className="relative w-20 h-20 rounded-lg md:rounded-xl overflow-hidden bg-muted shrink-0">
+							<Image
+								className="object-cover"
+								src={member.photoUrl}
+								alt={member.name}
+								fill
+								style={{ objectFit: "cover" }}
+								sizes="80px"
+							/>
+						</div>
 						<div>
 							<p>{member.name}</p>
 							<p className="text-sm text-muted-foreground">@{member.xLink}</p>

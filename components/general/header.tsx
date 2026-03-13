@@ -41,13 +41,6 @@ export function Header() {
 					<SheetContent
 						className={`z-250 grid grid-rows-[auto_1fr_auto] min-h-[calc(100vh)] w-screen py-3 md:w-3/4 md:max-w-sm`}
 					>
-						{/* <SheetHeader
-							className={`h-0`}
-						>
-							<SheetTitle>
-								
-							</SheetTitle>
-						</SheetHeader> */}
 						<div
 							className={`px-6 grid h-fit gap-4`}
 						>

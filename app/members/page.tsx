@@ -1,49 +1,30 @@
 import { columns, Member } from "./columns";
 import { ViewsMembersListing } from "@/components/views/members/listing";
+import { createClient } from "@/lib/supabase/server";
 
 async function getData(): Promise<Member[]> {
-	return [
-		{
-			id: "wanaokii",
-			photoUrl: "https://pbs.twimg.com/profile_images/2007180413849219079/DfXIO_9U_400x400.jpg",
-			name: "Wan Aqil",
-			roleCompany: "Fullstack developer",
-			skills: [
-				"Developer"
-			],
-			xLink: "wanaokii",
-			achievements: [
-				{
-					"type": "project",
-					"info": "Hypebiscus"
-				},
-				{
-					"type": "project",
-					"info": "Yeeteora"
-				}
-			]
-		},
-		{
-			id: "Ponderman_NFT",
-			photoUrl: "https://pbs.twimg.com/profile_images/2027678348474986496/Z2nPS2dI_400x400.jpg",
-			name: "Pondy (Lami)",
-			roleCompany: "Designer",
-			skills: [
-				"Designer"
-			],
-			xLink: "Ponderman_NFT",
-			achievements: [
-				{
-					"type": "bounty",
-					"info": "Twitter Thread or Article on Superteam Malaysia"
-				},
-				{
-					"type": "bounty",
-					"info": "Design Superteam MY Merch"
-				}
-			]
-		}
-	]
+	const supabase = await createClient();
+
+	const { data, error } = await supabase
+		.from("members")
+		.select("*")
+		.order("created_at", { ascending: false });
+
+	if (error) {
+		console.error("Error fetching members:", error);
+		return [];
+	}
+
+	// Transform Supabase data to match Member type
+	return data.map((member: Record<string, unknown>) => ({
+		id: member.id as string,
+		photoUrl: member.photo_url as string,
+		name: member.name as string,
+		roleCompany: member.role_company as string,
+		skills: (member.skills as string[]) || [],
+		xLink: member.x_link as string,
+		achievements: (member.achievements as Member["achievements"]) || [],
+	}));
 }
 
 export default async function Page() {

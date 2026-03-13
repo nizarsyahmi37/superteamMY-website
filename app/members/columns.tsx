@@ -75,13 +75,14 @@ export const columns: ColumnDef<Member>[] = [
 				<div
 					className={`grid grid-cols-[3rem_1fr] gap-4 p-2`}
 				>
-					<Image
-						className={`rounded-lg md:rounded-xl`}
-						src={photoUrl}
-						alt={name}
-						width={1000}
-						height={1000}
-					/>
+					<div className="relative w-12 h-12 rounded-lg md:rounded-xl overflow-hidden bg-muted shrink-0">
+						<Image
+							className={`object-cover`}
+							src={photoUrl}
+							alt={name}
+							fill
+						/>
+					</div>
 					<div
 						className={`my-auto`}
 					>
@@ -225,13 +226,15 @@ export const columns: ColumnDef<Member>[] = [
 						<DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
 							<DialogHeader>
 								<DialogTitle className="flex items-center gap-4">
-									<Image
-										className={`rounded-lg md:rounded-xl`}
-										src={member.photoUrl}
-										alt={member.name}
-										width={80}
-										height={80}
-									/>
+									<div className="relative w-20 h-20 rounded-lg md:rounded-xl overflow-hidden bg-muted shrink-0">
+										<Image
+											className="object-cover"
+											src={member.photoUrl}
+											alt={member.name}
+											fill
+											style={{ objectFit: "cover" }}
+										/>
+									</div>
 									<div>
 										<p>{member.name}</p>
 										<p className="text-sm text-muted-foreground">@{member.xLink}</p>
