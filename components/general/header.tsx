@@ -41,29 +41,42 @@ export function Header() {
 					<SheetContent
 						className={`z-250 grid grid-rows-[auto_1fr_auto] min-h-[calc(100vh)] w-screen py-3 md:w-3/4 md:max-w-sm`}
 					>
-						<SheetHeader
-							className={`border-b border-b-foreground/15 pb-6 mx-4`}
+						{/* <SheetHeader
+							className={`h-0`}
 						>
 							<SheetTitle>
-								<Image
-									className={`mx-auto max-h-15 duration-100 block dark:hidden hover:scale-110`}
-									src={`/assets/superteam-logo-dark.svg`}
-									alt={`Superteam Malaysia`}
-									width={300}
-									height={300}
-								/>
-								<Image
-									className={`mx-auto max-h-15 duration-100 hidden dark:block hover:scale-110`}
-									src={`/assets/superteam-logo-light.svg`}
-									alt={`Superteam Malaysia`}
-									width={300}
-									height={300}
-								/>
+								
 							</SheetTitle>
-						</SheetHeader>
+						</SheetHeader> */}
 						<div
 							className={`px-6 grid h-fit gap-4`}
 						>
+							<SheetClose
+								className={`text-left px-2 py-4 border-b border-b-foreground/15`}
+								asChild
+							>
+								<Link
+									href={`/`}
+									title={`Superteam Malaysia | The Talent Layer of Solana in Malaysia`}
+									target={`_self`}
+									className={`group`}
+								>
+									<Image
+										className={`mx-auto max-h-15 duration-100 block dark:hidden group-hover:scale-110`}
+										src={`/assets/superteam-logo-dark.svg`}
+										alt={`Superteam Malaysia`}
+										width={300}
+										height={300}
+									/>
+									<Image
+										className={`mx-auto max-h-15 duration-100 hidden dark:block group-hover:scale-110`}
+										src={`/assets/superteam-logo-light.svg`}
+										alt={`Superteam Malaysia`}
+										width={300}
+										height={300}
+									/>
+								</Link>
+							</SheetClose>
 							<SheetClose
 								className={`text-left`}
 								asChild

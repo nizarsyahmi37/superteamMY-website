@@ -23,14 +23,13 @@ export function ViewsLandingHero() {
 					We help promising projects launch and grow. Find projects, earn through bounties, and collaborate with people shipping the next wave of crypto products.
 				</p>
 				<div
-					className={`flex flex-auto gap-4 w-fit my-2 lg:my-4`}
+					className={`h-fit flex flex-auto gap-4 w-fit my-2 lg:my-4`}
 				>
 					<Link
 						href={`https://t.me/SuperteamMY`}
 						prefetch={`auto`}
 						title={`Superteam Malaysia | A community of the best talent learning, earning and building on Solana in Malaysia`}
 						target={`_blank`}
-						className={`grid grid-cols-[1fr_auto] align-middle content-center font-bold duration-150 uppercase text-5xl mb-48 mt-auto sm:mb-60 md:mb-4 sm:text-6xl hover:animate-pulse hover:text-super-yellow`}
 					>
 						<Button
 							variant={`default`}
@@ -45,7 +44,6 @@ export function ViewsLandingHero() {
 						prefetch={`auto`}
 						title={`Superteam Earn | Crypto Bounties, Web3 Jobs & Solana Opportunities`}
 						target={`_blank`}
-						className={`hover:underline hover:text-super-yellow`}
 					>
 						<Button
 							variant={`default`}
