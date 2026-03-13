@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { archivo, archivo_black } from "@/lib/general/fonts";
+import { Reveal } from "@/components/ui/reveal";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -9,6 +10,7 @@ export function ViewsLandingHero() {
 		<section
 			className={`${archivo.className} grid rounded-2xl p-3 gap-4 grid-cols-[1fr_4fr] grid-rows-[1fr_auto_0.5rem_auto] md:min-h-[calc(50vh-0.75rem)] md:rounded-4xl md:p-6 md:grid-cols-[2fr_2fr_3fr] md:grid-rows-[1fr_auto_3rem_auto] lg:grid-cols-[1fr_2fr_1fr_2fr] lg:grid-rows-[3rem_auto_3rem_auto] xl:gap-15 xl:grid-cols-[3fr_1fr_2fr] xl:grid-rows-[3rem_1fr_3rem_auto]`}
 		>
+			<Reveal>
 			<div
 				className={`h-fit z-130 grid gap-6 col-start-1 col-end-3 row-start-1 row-end-2 md:gap-3 md:col-end-4 lg:row-end-3 lg:my-auto xl:col-end-2`}
 			>
@@ -55,6 +57,7 @@ export function ViewsLandingHero() {
 					</Link>
 				</div>
 			</div>
+			</Reveal>
 			<div
 				className={`z-140 grid max-w-full max-h-[90vh] overflow-hidden pt-6 col-start-2 col-end-3 row-start-2 row-end-5 md:col-start-2 md:col-end-4 lg:col-start-3 lg:col-end-5 lg:row-start-2 xl:row-start-1 xl:col-start-2 xl:col-end-4`}
 			>

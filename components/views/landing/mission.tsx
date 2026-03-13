@@ -1,14 +1,16 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { archivo, archivo_black } from "@/lib/general/fonts";
+import { Reveal } from "@/components/ui/reveal";
 import { ViewsLandingPartners } from "./partners";
 
 import Image from "next/image";
 
 export function ViewsLandingMission() {
-	return (		
+	return (
 		<section
 			className={`${archivo.className} grid gap-4 rounded-2xl p-3 md:rounded-4xl md:p-6 md:gap-12`}
 		>
+			<Reveal>
 			<div
 				className={`grid gap-6 grid-cols-1 grid-rows-[auto_auto] h-fit lg:gap-24 lg:grid-cols-[auto_1fr]`}
 			>
@@ -31,9 +33,12 @@ export function ViewsLandingMission() {
 						Superteam Malaysia brings together developers, designers, founders, and operators to collaborate, build, and launch impactful projects in the Solana ecosystem, turning ideas into real products through mentorship, funding pathways, and community-driven initiatives.
 					</p>
 				</div>
-				<div
-					className={`col-span-1 lg:col-span-2`}
-				>
+			</div>
+			</Reveal>
+			<Reveal delay={200}>
+			<div
+				className={`col-span-1 lg:col-span-2`}
+			>
 					<Carousel
 						opts={{
 							align: "start",
@@ -238,7 +243,7 @@ export function ViewsLandingMission() {
 						/>
 					</Carousel>
 				</div>
-			</div>
+			</Reveal>
 			<ViewsLandingPartners />
 		</section>
 	);

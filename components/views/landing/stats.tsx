@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { archivo_black } from "@/lib/general/fonts";
+import { Reveal } from "@/components/ui/reveal";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 interface CounterProps {
@@ -98,6 +99,7 @@ function StatCard({ label, value, suffix, description, bgClass }: { label: strin
 export function ViewsLandingStats() {
 	return (
 		<section className="grid gap-4 rounded-2xl p-3 md:min-h-[calc(50vh-0.75rem)] md:rounded-4xl md:p-6 md:gap-24">
+			<Reveal>
 			<div className="grid gap-6 grid-cols-1 lg:gap-24 lg:grid-cols-[auto_1fr]">
 				<h2 className="font-bold rounded-full bg-super-yellow text-foreground w-fit h-fit px-4 py-1 mt-3 dark:text-background">
 					Highlights
@@ -108,6 +110,8 @@ export function ViewsLandingStats() {
 					<br /> Real <span className={archivo_black.className}>results</span>.
 				</h3>
 			</div>
+			</Reveal>
+			<Reveal delay={200}>
 			<div className="grid grid-cols-9 gap-4 lg:gap-8">
 				<p className="col-start-1 col-end-10 row-start-1 row-end-2 rounded-xl p-0 sm:col-end-9 md:p-4 md:rounded-2xl md:col-start-2 md:col-end-6 md:row-start-1 md:row-end-2 lg:col-start-3">
 					Superteam Malaysia is built on collaboration, experience, and a deep understanding of the Solana ecosystem. Every project we support is driven by efficiency, precision, and long-term impact.
@@ -178,6 +182,7 @@ export function ViewsLandingStats() {
 					<StatCard {...stats[4]} />
 				</div>
 			</div>
+			</Reveal>
 		</section>
 	);
 }

@@ -1,4 +1,5 @@
 import { archivo, archivo_black } from "@/lib/general/fonts";
+import { Reveal } from "@/components/ui/reveal";
 
 import Image from "next/image";
 
@@ -7,6 +8,7 @@ export function ViewsLandingEvents() {
 		<section
 			className={`${archivo.className} grid gap-4 rounded-2xl p-3 md:min-h-[calc(50vh-0.75rem)] md:rounded-4xl md:p-6 md:gap-24`}
 		>
+			<Reveal>
 			<div
 				className={`grid grid-cols-9 grid-rows-[1fr_auto_3rem_auto_6rem] md:grid-rows-[auto_auto_auto_auto] gap-4`}
 			>
@@ -55,6 +57,7 @@ export function ViewsLandingEvents() {
 					height={1500}
 				/>
 			</div>
+			</Reveal>
 		</section>
 	);
 }

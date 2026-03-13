@@ -1,5 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { archivo, archivo_black } from "@/lib/general/fonts";
+import { Reveal } from "@/components/ui/reveal";
 
 import Image from "next/image";
 
@@ -8,6 +9,7 @@ export function ViewsLandingFaq() {
 		<section
 			className={`${archivo.className} grid grid-cols-1 gap-8 bg-super-yellow text-foreground rounded-2xl p-3 lg:grid-cols-2 md:min-h-[calc(30vh-0.75rem)] md:rounded-4xl md:p-6 md:gap-24 dark:text-background`}
 		>
+			<Reveal>
 			<div
 				className={`grid gap-6 grid-cols-1 grid-rows-[auto_1fr_auto] h-fit`}
 			>
@@ -40,6 +42,8 @@ export function ViewsLandingFaq() {
 					</p>
 				</div>
 			</div>
+			</Reveal>
+			<Reveal delay={200}>
 			<div>
 				<Accordion
 					type={`single`}
@@ -109,6 +113,7 @@ export function ViewsLandingFaq() {
 					</AccordionItem>
 				</Accordion>
 			</div>
+			</Reveal>
 		</section>
 	);
 }

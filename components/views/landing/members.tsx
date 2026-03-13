@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { archivo, archivo_black } from "@/lib/general/fonts";
+import { Reveal } from "@/components/ui/reveal";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 interface Achievement {
@@ -196,6 +197,7 @@ export function ViewsLandingMembers() {
 		<section
 			className={`${archivo.className} grid gap-4 rounded-2xl p-3 md:min-h-[calc(50vh-0.75rem)] md:rounded-4xl md:p-6 md:gap-2`}
 		>
+			<Reveal>
 			<div
 				className={`grid gap-6 grid-cols-1 grid-rows-[auto_auto] h-fit lg:gap-24 lg:grid-cols-[auto_1fr]`}
 			>
@@ -219,6 +221,8 @@ export function ViewsLandingMembers() {
 					</p>
 				</div>
 			</div>
+			</Reveal>
+			<Reveal delay={200}>
 			<div className="grid lg:grid-cols-2 gap-8">
 				{/* Featured Member Column - only show if there's a featured member */}
 				{featuredMember && (
@@ -348,6 +352,7 @@ export function ViewsLandingMembers() {
 					</div>
 				</div>
 			</div>
+			</Reveal>
 		</section>
 	);
 }

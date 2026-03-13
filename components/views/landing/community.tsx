@@ -2,12 +2,14 @@ import { CarouselItem } from "@/components/ui/carousel";
 import { CarouselAdaptive } from "@/components/ui/carousel/adaptive";
 import { Tweet } from "@/components/ui/tweet";
 import { archivo, archivo_black } from "@/lib/general/fonts";
+import { Reveal } from "@/components/ui/reveal";
 
 export function ViewsLandingCommunity() {
 	return (
 		<section
 			className={`${archivo.className} grid gap-4 rounded-2xl p-3 md:min-h-[calc(50vh-0.75rem)] md:rounded-4xl md:p-6 md:gap-2`}
 		>
+			<Reveal>
 			<div
 				className={`grid gap-6 grid-cols-1 grid-rows-[auto_auto] h-fit lg:gap-24 lg:grid-cols-[auto_1fr]`}
 			>
@@ -31,6 +33,8 @@ export function ViewsLandingCommunity() {
 					</p>
 				</div>
 			</div>
+			</Reveal>
+			<Reveal delay={200}>
 			<div
 				className={`max-w-[calc(100vw-3rem)] md:max-w-[calc(100vw-6rem)]`}
 			>
@@ -93,6 +97,7 @@ export function ViewsLandingCommunity() {
 					</div>
 				</div>
 			</div>
+			</Reveal>
 		</section>
 	);
 }

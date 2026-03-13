@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { archivo, archivo_black } from "@/lib/general/fonts";
+import { Reveal } from "@/components/ui/reveal";
 
 import Image from "next/image";
 
@@ -73,6 +74,7 @@ export function ViewsLandingPartners() {
 
 	return (
 		<section className={`${archivo.className} py-16 bg-background overflow-hidden`}>
+			<Reveal>
 			<div
 				className={`grid gap-6 grid-cols-1 grid-rows-[auto_auto] h-fit lg:gap-24 lg:grid-cols-[auto_1fr]`}
 			>
@@ -91,6 +93,8 @@ export function ViewsLandingPartners() {
 					</p>
 				</div>
 			</div>
+			</Reveal>
+			<Reveal delay={200}>
 			<div className="relative">
 				{/* Fade masks on left and right */}
 				<div className="absolute left-0 top-0 bottom-0 w-24 bg-linear-to-r from-background to-transparent z-10 pointer-events-none" />
@@ -140,6 +144,7 @@ export function ViewsLandingPartners() {
 					animation-play-state: paused;
 				}
 			`}</style>
+			</Reveal>
 		</section>
 	);
 }
