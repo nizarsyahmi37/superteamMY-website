@@ -126,28 +126,28 @@ export function Footer() {
 				className={`flex align-bottom col-start-1 row-start-1 col-end-3 row-end-3 lg:col-start-2 lg:col-end-3`}
 			>
 				<Image
-					className={`hidden xl:block ml-auto mt-auto`}
+					className={`hidden xl:block ml-auto mt-auto animate-float-slow`}
 					src={`/assets/batik/floral-3.svg`}
 					alt={`Superteam Malaysia - Floral Batik Motif 2`}
 					width={400}
 					height={400}
 				/>
 				<Image
-					className={`hidden md:block xl:hidden ml-auto mt-auto`}
+					className={`hidden md:block xl:hidden ml-auto mt-auto animate-float`}
 					src={`/assets/batik/floral-3.svg`}
 					alt={`Superteam Malaysia - Floral Batik Motif 3`}
 					width={360}
 					height={360}
 				/>
 				<Image
-					className={`hidden sm:block md:hidden mx-auto mt-auto`}
+					className={`hidden sm:block md:hidden mx-auto mt-auto animate-sway`}
 					src={`/assets/batik/floral-2.svg`}
 					alt={`Superteam Malaysia - Floral Batik Motif 2`}
 					width={500}
 					height={500}
 				/>
 				<Image
-					className={`block sm:hidden mx-auto mt-auto`}
+					className={`block sm:hidden mx-auto mt-auto animate-sway`}
 					src={`/assets/batik/floral-2.svg`}
 					alt={`Superteam Malaysia - Floral Batik Motif 2`}
 					width={400}

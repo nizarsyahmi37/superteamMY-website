@@ -59,7 +59,7 @@ export function ViewsLandingHero() {
 				className={`z-20 grid max-w-full max-h-[90vh] overflow-hidden col-start-2 col-end-3 row-start-2 row-end-5 md:col-start-2 md:col-end-4 lg:col-start-3 lg:col-end-5 lg:row-start-2 xl:row-start-1 xl:col-start-2 xl:col-end-4`}
 			>
 				<Image
-					className={`z-30 ml-auto mt-auto col-start-1 col-end-2 row-start-1 row-end-2 -scale-x-100`}
+					className={`z-30 ml-auto mt-auto col-start-1 col-end-2 row-start-1 row-end-2 -scale-x-100 animate-float-slow`}
 					src={`/assets/batik/floral-3.svg`}
 					alt={`Superteam Malaysia - Floral Batik Motif 2`}
 					width={2000}

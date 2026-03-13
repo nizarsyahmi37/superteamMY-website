@@ -13,7 +13,7 @@ export function ViewsLandingFaq() {
 			>
 				<div>
 					<Image
-						className={`ml-auto max-w-[45vw] -mt-15 -mb-30 sm:-mt-30 sm:-mb-30 md:max-w-[30vw] md:-mt-30 md:-mb-30 lg:-mt-30 lg:-mb-45 xl:max-w-[24vw]`}
+						className={`ml-auto max-w-[45vw] -mt-15 -mb-30 sm:-mt-30 sm:-mb-30 md:max-w-[30vw] md:-mt-30 md:-mb-30 lg:-mt-30 lg:-mb-45 xl:max-w-[24vw] animate-float-reverse`}
 						src={`/assets/batik/floral-1.svg`}
 						alt={`Superteam Malaysia - Floral Batik Motif 1`}
 						width={450}

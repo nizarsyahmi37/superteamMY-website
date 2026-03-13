@@ -30,7 +30,7 @@ export function ViewsLandingEvents() {
 					Connect with builders, creators, and innovators in the Solana ecosystem. Find your tribe, exchange ideas, and grow with the community shaping the future of Solana.
 				</p>
 				<Image
-					className={`mt-0 col-start-1 col-end-10 row-start-3 row-end-5 lg:col-start-3 lg:col-end-10 lg:row-start-2 lg:row-end-5 lg:mt-auto`}
+					className={`mt-0 col-start-1 col-end-10 row-start-3 row-end-5 lg:col-start-3 lg:col-end-10 lg:row-start-2 lg:row-end-5 lg:mt-auto animate-float-slow`}
 					src={`/assets/batik/floral-5.svg`}
 					alt={`Superteam Malaysia - Floral Batik Motif 5`}
 					width={1500}
@@ -48,7 +48,7 @@ export function ViewsLandingEvents() {
 					/>
 				</div>
 				<Image
-					className={`rotate-180 mt-auto col-start-1 col-end-10 row-start-4 row-end-6 lg:hidden`}
+					className={`rotate-180 mt-auto col-start-1 col-end-10 row-start-4 row-end-6 lg:hidden animate-float`}
 					src={`/assets/batik/floral-5.svg`}
 					alt={`Superteam Malaysia - Floral Batik Motif 5`}
 					width={1500}
