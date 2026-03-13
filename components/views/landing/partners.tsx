@@ -17,14 +17,16 @@ interface Partner {
 export function ViewsLandingPartners() {
 	const [partners, setPartners] = useState<Partner[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [isDark, setIsDark] = useState(false);
+	const [isDark, setIsDark] = useState(() => {
+		if (typeof window !== "undefined") {
+			return document.documentElement.classList.contains("dark");
+		}
+		return false;
+	});
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	// Check for dark mode
 	useEffect(() => {
-		const isDarkMode = document.documentElement.classList.contains("dark");
-		setIsDark(isDarkMode);
-
 		const observer = new MutationObserver(() => {
 			setIsDark(document.documentElement.classList.contains("dark"));
 		});

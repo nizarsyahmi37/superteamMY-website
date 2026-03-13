@@ -145,30 +145,30 @@ export function ViewsMembersListing<TData, TValue>({
 	columns,
 	data
 } : DataTableProps<TData, TValue>) {
-	const [view, setView] = useState<"table" | "grid">("table");
-	const [isMobile, setIsMobile] = useState(false);
+	const [view, setView] = useState<"table" | "grid">(() => {
+		if (typeof window !== "undefined") {
+			return window.innerWidth < 768 ? "grid" : "table";
+		}
+		return "table";
+	});
 	const [searchQuery, setSearchQuery] = useState("");
 	const [skillFilter, setSkillFilter] = useState<string>("all");
 	const [sortBy, setSortBy] = useState<string>("name");
 	const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
 
-	// Detect screen size
+	// Detect screen size and force grid view on mobile
 	useEffect(() => {
 		const checkScreenSize = () => {
-			setIsMobile(window.innerWidth < 768);
+			if (window.innerWidth < 768 && view !== "grid") {
+				setView("grid");
+			}
 		};
 
 		checkScreenSize();
 		window.addEventListener("resize", checkScreenSize);
 		return () => window.removeEventListener("resize", checkScreenSize);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-
-	// Force grid view on mobile
-	useEffect(() => {
-		if (isMobile) {
-			setView("grid");
-		}
-	}, [isMobile]);
 
 	const members = data as Member[];
 

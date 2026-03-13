@@ -188,9 +188,6 @@ export function ViewsLandingMembers() {
 		return null;
 	}
 
-	const totalMembers = members.length;
-	const totalAchievements = members.reduce((sum, m) => sum + m.achievements.length, 0);
-
 	// Calculate remaining members count - exclude featured from total
 	const totalToDisplay = featuredMember ? members.length - 1 : members.length;
 	const remainingCount = Math.max(0, totalToDisplay - displayMembers.length);

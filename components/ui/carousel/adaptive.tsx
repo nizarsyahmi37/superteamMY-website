@@ -36,6 +36,7 @@ export function CarouselAdaptive({
 			api.off("select", updateHeight);
 			api.off("reInit", updateHeight);
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [api]);
 
 	return (

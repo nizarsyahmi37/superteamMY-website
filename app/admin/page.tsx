@@ -167,6 +167,7 @@ export default function AdminPage() {
 			fetchAdmins();
 		}
 		setIsAuthChecking(false);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [router]);
 
 	// Show loading while checking auth
@@ -334,7 +335,7 @@ export default function AdminPage() {
 				const fileExt = photoFile.name.split(".").pop();
 				const fileName = `${cleanXHandle}_${Date.now()}.${fileExt}`;
 
-				const { data: uploadData, error: uploadError } = await supabase.storage
+				const { error: uploadError } = await supabase.storage
 					.from("member-photos")
 					.upload(fileName, photoFile, { cacheControl: "3600", upsert: false });
 
@@ -352,9 +353,6 @@ export default function AdminPage() {
 				type: a.type,
 				info: a.info || ""
 			}));
-			console.log("Filtered achievements:", filteredAchievements);
-			const skillsArray = skills.split(",").map((s) => s.trim()).filter(Boolean);
-			const memberId = editingMember?.id || xLink.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
 
 			if (editingMember) {
 				// Use API route for editing to avoid RLS issues
