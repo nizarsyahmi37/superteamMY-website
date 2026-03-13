@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { archivo_black } from "@/lib/general/fonts";
+import { archivo, archivo_black } from "@/lib/general/fonts";
 
 import Image from "next/image";
 
@@ -70,7 +70,7 @@ export function ViewsLandingPartners() {
 	const totalPartners = [...partners, ...partners, ...partners];
 
 	return (
-		<section className="py-16 bg-background overflow-hidden">
+		<section className={`${archivo.className} py-16 bg-background overflow-hidden`}>
 			<div
 				className={`grid gap-6 grid-cols-1 grid-rows-[auto_auto] h-fit lg:gap-24 lg:grid-cols-[auto_1fr]`}
 			>
