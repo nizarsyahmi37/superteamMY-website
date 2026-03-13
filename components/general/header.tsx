@@ -35,12 +35,21 @@ export function Header() {
 				<Sheet>
 					<SheetTrigger asChild>
 						<FaBars
-							className={`my-auto w-6 h-6 cursor-pointer hover:scale-110 hover:text-super-yellow`}
+							className={`ml-auto my-auto w-6 h-6 cursor-pointer hover:scale-110 hover:text-super-yellow`}
 						/>
 					</SheetTrigger>
 					<SheetContent
 						className={`z-250 grid grid-rows-[auto_1fr_auto] min-h-[calc(100vh)] w-screen py-3 md:w-3/4 md:max-w-sm`}
 					>
+						<SheetHeader
+							className={`h-0 hidden`}
+						>
+							<SheetTitle
+								className={`h-0 hidden`}
+							>
+								
+							</SheetTitle>
+						</SheetHeader>
 						<div
 							className={`px-6 grid h-fit gap-4`}
 						>

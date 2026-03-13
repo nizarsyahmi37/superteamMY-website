@@ -1,5 +1,6 @@
 import { columns, Member } from "./columns";
 import { ViewsMembersListing } from "@/components/views/members/listing";
+import { ViewsMembersHero } from "@/components/views/members/hero";
 import { createClient } from "@/lib/supabase/server";
 
 async function getData(): Promise<Member[]> {
@@ -30,9 +31,19 @@ async function getData(): Promise<Member[]> {
 export default async function Page() {
 	const data = await getData();
 
+	// Calculate totals for hero
+	const totalMembers = data.length;
+	const totalAchievements = data.reduce((sum, member) => sum + member.achievements.length, 0);
+
 	return (
-		<div className="container mx-auto py-10">
-			<ViewsMembersListing columns={columns} data={data} />
-		</div>
+		<main>
+			<ViewsMembersHero
+				totalMembers={totalMembers}
+				totalAchievements={totalAchievements}
+			/>
+			<div className="container mx-auto px-4 pb-16">
+				<ViewsMembersListing columns={columns} data={data} />
+			</div>
+		</main>
 	);
 }

@@ -17,6 +17,12 @@ ALTER TABLE public.members ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow public read access" ON public.members
   FOR SELECT USING (true);
 
+-- Add featured column to members table
+ALTER TABLE public.members ADD COLUMN IF NOT EXISTS is_featured BOOLEAN DEFAULT false;
+
+-- Create index for faster queries
+CREATE INDEX IF NOT EXISTS idx_members_is_featured ON public.members(is_featured);
+
 -- Create the partners table with light and dark mode logos
 CREATE TABLE IF NOT EXISTS public.partners (
   id TEXT PRIMARY KEY,

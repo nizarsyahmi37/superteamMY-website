@@ -192,7 +192,7 @@ export const columns: ColumnDef<Member>[] = [
 						<div className="flex gap-2 text-sm">
 							{counts.filter(c => c.count > 0).map((c, idx) => (
 								<span key={c.type} className="font-medium">
-									{c.count} {c.type}{c.count < 2 ? `` : c.type !== `bounty` ? `s` : `ies`}
+									{c.count} {c.type !== `bounty` ? c.type : `bount`}{c.count < 2 ? `` : c.type !== `bounty` ? `s` : `ies`}
 									{idx < counts.filter(x => x.count > 0).length - 1 ? "," : ""}
 								</span>
 							))}

@@ -24,6 +24,7 @@ interface Member {
 	xLink: string;
 	skills: string[];
 	achievements: Achievement[];
+	isFeatured: boolean;
 }
 
 interface Partner {
@@ -97,6 +98,7 @@ export default function AdminPage() {
 					xLink: m.x_link,
 					skills: m.skills || [],
 					achievements: m.achievements || [],
+					isFeatured: m.is_featured || false,
 				}))
 			);
 		}
@@ -154,9 +156,13 @@ export default function AdminPage() {
 
 	const handleAddAchievement = () => setAchievements([...achievements, { type: "", info: "" }]);
 	const handleRemoveAchievement = (index: number) => setAchievements(achievements.filter((_, i) => i !== index));
-	const handleAchievementChange = (index: number, field: keyof Achievement, value: string) => {
+	const handleAchievementChange = (index: number, field: string, value: string) => {
 		const newAchievements = [...achievements];
-		newAchievements[index] = { ...newAchievements[index], [field]: value };
+		newAchievements[index] = {
+			...newAchievements[index],
+			type: field === "type" ? value : (newAchievements[index]?.type || ""),
+			info: field === "info" ? value : (newAchievements[index]?.info || "")
+		};
 		setAchievements(newAchievements);
 	};
 
@@ -169,7 +175,11 @@ export default function AdminPage() {
 		setRoleCompany(member.roleCompany);
 		setXLink(member.xLink);
 		setSkills(member.skills.join(", "));
-		setAchievements(member.achievements.length > 0 ? member.achievements : [{ type: "", info: "" }]);
+		// Ensure achievements have proper type and info fields
+		const formattedAchievements = member.achievements && member.achievements.length > 0
+			? member.achievements.map(a => ({ type: a.type || "", info: a.info || "" }))
+			: [{ type: "", info: "" }];
+		setAchievements(formattedAchievements);
 		setUsePhotoUrl(true);
 		setMessage(null);
 	};
@@ -225,16 +235,29 @@ export default function AdminPage() {
 				throw new Error("Photo is required");
 			}
 
-			const filteredAchievements = achievements.filter((a) => a.type.trim() !== "" && a.info.trim() !== "");
+			const filteredAchievements = achievements.filter((a) => a && a.type && a.type.trim() !== "").map(a => ({
+				type: a.type,
+				info: a.info || ""
+			}));
+			console.log("Filtered achievements:", filteredAchievements);
 			const skillsArray = skills.split(",").map((s) => s.trim()).filter(Boolean);
 			const memberId = editingMember?.id || xLink.replace(/[^a-zA-Z0-9]/g, "_").toLowerCase();
 
 			if (editingMember) {
-				const { error } = await supabase
-					.from("members")
-					.update({ name, photo_url: finalPhotoUrl, role_company: roleCompany, x_link: xLink, skills: skillsArray, achievements: filteredAchievements })
-					.eq("id", editingMember.id);
-				if (error) throw error;
+				// Use API route for editing to avoid RLS issues
+				const formData = new FormData();
+				formData.append("name", name);
+				formData.append("photoUrl", finalPhotoUrl);
+				formData.append("roleCompany", roleCompany);
+				formData.append("xLink", xLink);
+				formData.append("skills", skills);
+				formData.append("achievements", JSON.stringify(filteredAchievements));
+				formData.append("isUpdate", "true");
+				formData.append("existingId", editingMember.id);
+
+				const response = await fetch("/api/admin/members", { method: "POST", body: formData });
+				const result = await response.json();
+				if (!response.ok) throw new Error(result.error || "Failed to update member");
 				setMessage({ type: "success", text: "Member updated successfully!" });
 			} else {
 				const formData = new FormData();
@@ -267,6 +290,26 @@ export default function AdminPage() {
 		const { error } = await supabase.from("members").delete().eq("id", memberId);
 		if (error) alert("Failed to delete member: " + error.message);
 		else fetchMembers();
+	};
+
+	const toggleFeatured = async (memberId: string, setAsFeatured: boolean) => {
+		try {
+			// Use API route with service role for both setting and unsetting featured
+			const response = await fetch("/api/admin/members/featured", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ memberId, setAsFeatured }),
+			});
+
+			if (!response.ok) {
+				const result = await response.json();
+				throw new Error(result.error || "Failed to update featured status");
+			}
+			fetchMembers();
+		} catch (err: unknown) {
+			const error = err as { message?: string };
+			alert("Failed to update featured status: " + (error.message || "Unknown error"));
+		}
 	};
 
 	// ==================== PARTNER HANDLERS ====================
@@ -516,10 +559,16 @@ export default function AdminPage() {
 											<div key={member.id} className="flex items-center gap-3 p-3 border rounded-lg">
 												<div className="relative w-12 h-12 rounded-lg overflow-hidden bg-muted shrink-0"><Image src={member.photoUrl} alt={member.name} fill className="object-cover" /></div>
 												<div className="flex-1 min-w-0"><p className="font-medium truncate">{member.name}</p><p className="text-sm text-muted-foreground truncate">@{member.xLink}</p></div>
-												<div className="flex gap-2">
-													<Button variant="outline" size="sm" onClick={() => handleEditMember(member)}>Edit</Button>
-													<Button variant="destructive" size="sm" onClick={() => handleDeleteMember(member.id)}>Delete</Button>
-												</div>
+												<Button
+													variant={member.isFeatured ? "default" : "outline"}
+													size="sm"
+													onClick={() => toggleFeatured(member.id, !member.isFeatured)}
+													className={member.isFeatured ? "bg-super-yellow text-black hover:bg-super-yellow/80" : ""}
+												>
+													{member.isFeatured ? "Unfeature" : "Feature"}
+												</Button>
+												<Button variant="outline" size="sm" onClick={() => handleEditMember(member)}>Edit</Button>
+												<Button variant="destructive" size="sm" onClick={() => handleDeleteMember(member.id)}>Delete</Button>
 											</div>
 										))}
 									</div>
