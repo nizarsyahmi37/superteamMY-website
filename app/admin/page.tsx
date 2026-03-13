@@ -47,6 +47,7 @@ export default function AdminPage() {
 	const supabase = createClient();
 	const [activeTab, setActiveTab] = useState<"members" | "partners" | "admins">("members");
 	const [isLoading, setIsLoading] = useState(false);
+	const [isAuthChecking, setIsAuthChecking] = useState(true);
 	const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
 	// Admins state
@@ -165,7 +166,17 @@ export default function AdminPage() {
 			fetchPartners();
 			fetchAdmins();
 		}
+		setIsAuthChecking(false);
 	}, [router]);
+
+	// Show loading while checking auth
+	if (isAuthChecking) {
+		return (
+			<div className="min-h-screen flex items-center justify-center bg-background">
+				<div className="animate-pulse text-muted-foreground">Loading...</div>
+			</div>
+		);
+	}
 
 	const handleLogout = () => {
 		localStorage.removeItem("admin_session");
