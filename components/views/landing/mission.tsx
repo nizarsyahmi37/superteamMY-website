@@ -1,12 +1,13 @@
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { archivo, archivo_black } from "@/lib/general/fonts";
+import { ViewsLandingPartners } from "./partners";
 
 import Image from "next/image";
 
 export function ViewsLandingMission() {
 	return (		
 		<section
-			className={`${archivo.className} grid gap-4 rounded-2xl p-3 md:min-h-[calc(50vh-0.75rem)] md:rounded-4xl md:p-6 md:gap-24`}
+			className={`${archivo.className} grid gap-4 rounded-2xl p-3 md:rounded-4xl md:p-6 md:gap-12`}
 		>
 			<div
 				className={`grid gap-6 grid-cols-1 grid-rows-[auto_auto] h-fit lg:gap-24 lg:grid-cols-[auto_1fr]`}
@@ -238,6 +239,7 @@ export function ViewsLandingMission() {
 					</Carousel>
 				</div>
 			</div>
+			<ViewsLandingPartners />
 		</section>
 	);
 }

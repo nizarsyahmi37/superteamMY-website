@@ -16,3 +16,20 @@ ALTER TABLE public.members ENABLE ROW LEVEL SECURITY;
 -- Allow public read access
 CREATE POLICY "Allow public read access" ON public.members
   FOR SELECT USING (true);
+
+-- Create the partners table with light and dark mode logos
+CREATE TABLE IF NOT EXISTS public.partners (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  logo_url TEXT NOT NULL,
+  logo_url_dark TEXT NOT NULL DEFAULT '',
+  website_url TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Enable RLS
+ALTER TABLE public.partners ENABLE ROW LEVEL SECURITY;
+
+-- Allow public read access
+CREATE POLICY "Allow public read access" ON public.partners
+  FOR SELECT USING (true);
