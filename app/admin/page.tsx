@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/client";
-import { LuSearch, LuUsers, LuHandshake } from "react-icons/lu";
+import { LuSearch, LuUsers, LuHandshake, LuShield } from "react-icons/lu";
 
 // Types
 interface Achievement {
@@ -35,12 +35,27 @@ interface Partner {
 	websiteUrl: string;
 }
 
+interface Admin {
+	id: string;
+	username: string;
+	email: string;
+	created_at: string;
+}
+
 export default function AdminPage() {
 	const router = useRouter();
 	const supabase = createClient();
-	const [activeTab, setActiveTab] = useState<"members" | "partners">("members");
+	const [activeTab, setActiveTab] = useState<"members" | "partners" | "admins">("members");
 	const [isLoading, setIsLoading] = useState(false);
 	const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+	// Admins state
+	const [admins, setAdmins] = useState<Admin[]>([]);
+	const [editingAdmin, setEditingAdmin] = useState<Admin | null>(null);
+	const [isLoadingAdmins, setIsLoadingAdmins] = useState(true);
+	const [adminUsername, setAdminUsername] = useState("");
+	const [adminEmail, setAdminEmail] = useState("");
+	const [adminPassword, setAdminPassword] = useState("");
 
 	// Members state
 	const [members, setMembers] = useState<Member[]>([]);
@@ -126,6 +141,20 @@ export default function AdminPage() {
 		setIsLoadingPartners(false);
 	};
 
+	const fetchAdmins = async () => {
+		setIsLoadingAdmins(true);
+		try {
+			const response = await fetch("/api/admin/admins");
+			const data = await response.json();
+			if (response.ok) {
+				setAdmins(data);
+			}
+		} catch (error) {
+			console.error("Error fetching admins:", error);
+		}
+		setIsLoadingAdmins(false);
+	};
+
 	// Check admin session
 	useEffect(() => {
 		const session = localStorage.getItem("admin_session");
@@ -134,12 +163,85 @@ export default function AdminPage() {
 		} else {
 			fetchMembers();
 			fetchPartners();
+			fetchAdmins();
 		}
 	}, [router]);
 
 	const handleLogout = () => {
 		localStorage.removeItem("admin_session");
 		router.push("/admin/login");
+	};
+
+	// ==================== ADMIN HANDLERS ====================
+
+	const handleEditAdmin = (admin: Admin) => {
+		setEditingAdmin(admin);
+		setAdminUsername(admin.username);
+		setAdminEmail(admin.email);
+		setAdminPassword("");
+		setMessage(null);
+	};
+
+	const handleCancelEditAdmin = () => {
+		setEditingAdmin(null);
+		resetAdminForm();
+	};
+
+	const resetAdminForm = () => {
+		setAdminUsername("");
+		setAdminEmail("");
+		setAdminPassword("");
+	};
+
+	const handleSubmitAdmin = async (e: React.FormEvent) => {
+		e.preventDefault();
+		setIsLoading(true);
+		setMessage(null);
+
+		try {
+			if (!adminUsername.trim() || !adminEmail.trim() || !adminPassword.trim()) {
+				throw new Error("All fields are required");
+			}
+
+			const formData = new FormData();
+			formData.append("username", adminUsername);
+			formData.append("email", adminEmail);
+			formData.append("password", adminPassword);
+			formData.append("isUpdate", editingAdmin ? "true" : "false");
+			formData.append("existingId", editingAdmin?.id || "");
+
+			const response = await fetch("/api/admin/admins", {
+				method: "POST",
+				body: formData,
+			});
+
+			const result = await response.json();
+			if (!response.ok) throw new Error(result.error || "Failed to save admin");
+
+			setMessage({ type: "success", text: editingAdmin ? "Admin updated successfully!" : "Admin added successfully!" });
+			resetAdminForm();
+			setEditingAdmin(null);
+			fetchAdmins();
+		} catch (error: unknown) {
+			const err = error as { message?: string };
+			setMessage({ type: "error", text: err.message || "Failed to save admin" });
+		}
+
+		setIsLoading(false);
+	};
+
+	const handleDeleteAdmin = async (adminId: string) => {
+		if (!confirm("Are you sure you want to delete this admin?")) return;
+
+		try {
+			const response = await fetch(`/api/admin/admins?id=${adminId}`, {
+				method: "DELETE",
+			});
+			if (!response.ok) throw new Error("Failed to delete admin");
+			fetchAdmins();
+		} catch {
+			alert("Failed to delete admin");
+		}
 	};
 
 	// ==================== MEMBER HANDLERS ====================
@@ -464,6 +566,9 @@ export default function AdminPage() {
 					<Button variant={activeTab === "partners" ? "default" : "outline"} onClick={() => setActiveTab("partners")}>
 						<LuHandshake className="mr-2 h-4 w-4" /> Partners
 					</Button>
+					<Button variant={activeTab === "admins" ? "default" : "outline"} onClick={() => setActiveTab("admins")}>
+						<LuShield className="mr-2 h-4 w-4" /> Admins
+					</Button>
 				</div>
 
 				{/* MEMBERS TAB */}
@@ -670,6 +775,97 @@ export default function AdminPage() {
 													<Button variant="outline" size="sm" onClick={() => handleEditPartner(partner)}>Edit</Button>
 													<Button variant="destructive" size="sm" onClick={() => handleDeletePartner(partner.id)}>Delete</Button>
 												</div>
+											</div>
+										))}
+									</div>
+								)}
+							</CardContent>
+						</Card>
+					</div>
+				)}
+
+				{/* ADMINS TAB */}
+				{activeTab === "admins" && (
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+						<Card>
+							<CardHeader>
+								<CardTitle>{editingAdmin ? "Edit Admin" : "Add New Admin"}</CardTitle>
+								<CardDescription>{editingAdmin ? "Update the admin details below" : "Fill in the details to add a new admin"}</CardDescription>
+							</CardHeader>
+							<CardContent>
+								{editingAdmin && (
+									<div className="mb-4 p-3 bg-yellow-100 text-yellow-800 rounded-md">
+										Editing: <strong>{editingAdmin.username}</strong>
+										<Button variant="link" size="sm" onClick={handleCancelEditAdmin} className="ml-2 p-0 h-auto text-yellow-800">Cancel</Button>
+									</div>
+								)}
+								<form onSubmit={handleSubmitAdmin} className="space-y-4">
+									<div className="space-y-2">
+										<Label htmlFor="adminUsername">Username *</Label>
+										<Input
+											id="adminUsername"
+											placeholder="admin"
+											value={adminUsername}
+											onChange={(e) => setAdminUsername(e.target.value)}
+											required
+										/>
+									</div>
+									<div className="space-y-2">
+										<Label htmlFor="adminEmail">Email *</Label>
+										<Input
+											id="adminEmail"
+											type="email"
+											placeholder="admin@example.com"
+											value={adminEmail}
+											onChange={(e) => setAdminEmail(e.target.value)}
+											required
+										/>
+									</div>
+									<div className="space-y-2">
+										<Label htmlFor="adminPassword">Password *</Label>
+										<Input
+											id="adminPassword"
+											type="password"
+											placeholder={editingAdmin ? "Enter new password to update" : "Enter password"}
+											value={adminPassword}
+											onChange={(e) => setAdminPassword(e.target.value)}
+											required
+										/>
+									</div>
+									{message && <div className={`p-3 rounded-md ${message.type === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>{message.text}</div>}
+									<div className="flex gap-2">
+										<Button type="submit" className="flex-1" disabled={isLoading}>
+											{isLoading ? "Saving..." : editingAdmin ? "Update Admin" : "Add Admin"}
+										</Button>
+										{editingAdmin && <Button type="button" variant="outline" onClick={handleCancelEditAdmin}>Cancel</Button>}
+									</div>
+								</form>
+							</CardContent>
+						</Card>
+
+						<Card>
+							<CardHeader>
+								<CardTitle>Existing Admins</CardTitle>
+								<CardDescription>{admins.length} admin{admins.length !== 1 ? "s" : ""} in database</CardDescription>
+							</CardHeader>
+							<CardContent>
+								{isLoadingAdmins ? (
+									<p>Loading...</p>
+								) : admins.length === 0 ? (
+									<p className="text-muted-foreground">No admins found.</p>
+								) : (
+									<div className="space-y-3 max-h-[600px] overflow-y-auto">
+										{admins.map((admin) => (
+											<div key={admin.id} className="flex items-center gap-3 p-3 border rounded-lg">
+												<div className="w-10 h-10 rounded-full bg-super-yellow/20 flex items-center justify-center">
+													<LuShield className="h-5 w-5 text-super-yellow" />
+												</div>
+												<div className="flex-1 min-w-0">
+													<p className="font-medium truncate">{admin.username}</p>
+													<p className="text-sm text-muted-foreground truncate">{admin.email}</p>
+												</div>
+												<Button variant="outline" size="sm" onClick={() => handleEditAdmin(admin)}>Edit</Button>
+												<Button variant="destructive" size="sm" onClick={() => handleDeleteAdmin(admin.id)}>Delete</Button>
 											</div>
 										))}
 									</div>

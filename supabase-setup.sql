@@ -39,3 +39,19 @@ ALTER TABLE public.partners ENABLE ROW LEVEL SECURITY;
 -- Allow public read access
 CREATE POLICY "Allow public read access" ON public.partners
   FOR SELECT USING (true);
+
+-- Create the admins table
+CREATE TABLE IF NOT EXISTS public.admins (
+  id TEXT PRIMARY KEY,
+  username TEXT NOT NULL UNIQUE,
+  email TEXT NOT NULL UNIQUE,
+  password_hash TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Enable RLS
+ALTER TABLE public.admins ENABLE ROW LEVEL SECURITY;
+
+-- Allow public read access (for login check)
+CREATE POLICY "Allow public read access" ON public.admins
+  FOR SELECT USING (true);

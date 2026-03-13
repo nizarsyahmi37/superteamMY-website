@@ -20,13 +20,26 @@ export default function AdminLoginPage() {
 		setError("");
 		setIsLoading(true);
 
-		// Simple credential check (for demo purposes)
-		if (email === "admin@domain.com" && password === "admin" && username === "admin") {
+		try {
+			const response = await fetch("/api/admin/login", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ username, email, password }),
+			});
+
+			const result = await response.json();
+
+			if (!response.ok) {
+				setError(result.error || "Invalid credentials");
+				setIsLoading(false);
+				return;
+			}
+
 			// Store admin session in localStorage
-			localStorage.setItem("admin_session", "true");
+			localStorage.setItem("admin_session", JSON.stringify(result.admin));
 			router.push("/admin");
-		} else {
-			setError("Invalid credentials");
+		} catch {
+			setError("An error occurred. Please try again.");
 		}
 
 		setIsLoading(false);
@@ -59,7 +72,7 @@ export default function AdminLoginPage() {
 							<Input
 								id="email"
 								type="email"
-								placeholder="admin@domain.com"
+								placeholder="admin@example.com"
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								required
@@ -70,7 +83,7 @@ export default function AdminLoginPage() {
 							<Input
 								id="password"
 								type="password"
-								placeholder="admin"
+								placeholder="Enter your password"
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 								required
