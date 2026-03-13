@@ -47,7 +47,6 @@ export default function AdminPage() {
 	const supabase = createClient();
 	const [activeTab, setActiveTab] = useState<"members" | "partners" | "admins">("members");
 	const [isLoading, setIsLoading] = useState(false);
-	const [isAuthChecking, setIsAuthChecking] = useState(true);
 	const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
 	// Admins state
@@ -161,22 +160,38 @@ export default function AdminPage() {
 		const session = localStorage.getItem("admin_session");
 		if (!session) {
 			router.push("/admin/login");
-		} else {
-			fetchMembers();
-			fetchPartners();
-			fetchAdmins();
+			return;
 		}
-		setIsAuthChecking(false);
+		fetchMembers();
+		fetchPartners();
+		fetchAdmins();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [router]);
+	}, []);
 
-	// Show loading while checking auth
-	if (isAuthChecking) {
+	// Show loading while checking auth OR if no session - don't render anything
+	const [hasSession, setHasSession] = useState<boolean | null>(null);
+
+	useEffect(() => {
+		const session = localStorage.getItem("admin_session");
+		if (session) {
+			setHasSession(true);
+		} else {
+			setHasSession(false);
+		}
+	}, []);
+
+	// Don't render anything until we've checked for session
+	if (hasSession === null) {
 		return (
 			<div className="min-h-screen flex items-center justify-center bg-background">
 				<div className="animate-pulse text-muted-foreground">Loading...</div>
 			</div>
 		);
+	}
+
+	// If no session, don't render anything - redirect will happen
+	if (!hasSession) {
+		return null;
 	}
 
 	const handleLogout = () => {
